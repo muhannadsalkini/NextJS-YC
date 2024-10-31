@@ -60,7 +60,7 @@ export default async function Home({
         </ul>
       </section>
 
-      <SanityLive />
+      {/* <SanityLive /> */}
     </>
   );
 }
