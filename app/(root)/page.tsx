@@ -3,6 +3,7 @@ import SearchForm from "../../components/SearchForm";
 import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { auth } from "@/auth";
 
 export default async function Home({
   searchParams,
@@ -12,21 +13,8 @@ export default async function Home({
   const query = (await searchParams).query;
   const params = { search: query || null };
 
-  // const posts = await client.fetch(STARTUPS_QUERY);
+  const session = await auth();
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
-
-  // const posts = [
-  //   {
-  //     _createdAt: new Date(),
-  //     views: 55,
-  //     author: { _id: 1, name: "Adrian" },
-  //     description: "This is a description",
-  //     image:
-  //       "https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg",
-  //     category: "Robots",
-  //     title: "We Robots",
-  //   },
-  // ];
 
   return (
     <>
@@ -67,7 +55,21 @@ export default async function Home({
 
 // Sanity: is a headless content management system (CMS) that provides a flexible and real-time backend for managing structured content, enabling developers to build and deliver dynamic applications across multiple platforms.
 
-// Server Side Rendering (SSR): Generates pages on the server for each request, ensuring data is always up-to-date but may increase response time.
-// Static Site Generation (SSG): Pre-renders pages at build time, delivering fast load times with static content that doesn’t change per request.
-// Incremental Static Regeneration (ISR): Combines SSG and SSR, allowing specific pages to re-generate at set intervals to update content without a full rebuild.
-// Partial Pre-rendering (PPR): Renders critical parts of a page at build time and loads non-essential content later to improve perceived load speed.
+// Caching in Next.js is a technique that optimizes performance by storing and retrieving data efficiently, enhancing the speed of web applications.
+
+// * Server Side Rendering (SSR):
+// Generates pages dynamically on the server for each request, ensuring that users always receive the latest data. However, this may lead to increased response times due to server processing.
+
+// * Static Site Generation (SSG):
+// Pre-renders pages at build time, resulting in fast load times and delivering static content that does not change per request. This approach is ideal for content that remains relatively constant.
+
+// * Incremental Static Regeneration (ISR):
+// Combines the benefits of SSG and SSR by allowing specific pages to be regenerated at defined intervals. This enables content updates without requiring a complete rebuild of the site, ensuring freshness without sacrificing speed.
+
+// * Partial Pre-rendering (PPR):
+// Renders critical components of a page at build time while loading non-essential content later. This strategy improves the perceived load speed by prioritizing important information for users.
+
+// Benefits of Caching in Next.js:
+// * Improved Performance: Significantly reduces load times and server response times, leading to a more efficient application.
+// * Reduced Server Load: Minimizes redundant requests to the backend, conserving resources and improving scalability.
+// * Enhanced User Experience: Delivers faster page loads and smoother interactions, resulting in a more satisfying user experience overall.
