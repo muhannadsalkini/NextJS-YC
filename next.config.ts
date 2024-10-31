@@ -14,15 +14,16 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // // help to visualize the ppr (Partial Prerendering)
-  // experimental: {
-  //   ppr: true,
-  // },
-  // devIndicators: {
-  //   appIsrStatus: true,
-  //   buildActivity: true,
-  //   buildActivityPosition: "bottom-right",
-  // },
+  // help to visualize the ppr (Partial Prerendering)
+  experimental: {
+    // ppr: true,
+    after: true,
+  },
+  devIndicators: {
+    appIsrStatus: true,
+    buildActivity: true,
+    buildActivityPosition: "bottom-right",
+  },
 };
 
 export default nextConfig;

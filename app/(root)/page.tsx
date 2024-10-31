@@ -64,3 +64,10 @@ export default async function Home({
     </>
   );
 }
+
+// Sanity: is a headless content management system (CMS) that provides a flexible and real-time backend for managing structured content, enabling developers to build and deliver dynamic applications across multiple platforms.
+
+// Server Side Rendering (SSR): Generates pages on the server for each request, ensuring data is always up-to-date but may increase response time.
+// Static Site Generation (SSG): Pre-renders pages at build time, delivering fast load times with static content that doesn’t change per request.
+// Incremental Static Regeneration (ISR): Combines SSG and SSR, allowing specific pages to re-generate at set intervals to update content without a full rebuild.
+// Partial Pre-rendering (PPR): Renders critical parts of a page at build time and loads non-essential content later to improve perceived load speed.
