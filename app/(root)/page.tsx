@@ -57,6 +57,8 @@ export default async function Home({
 
 // Type generation (typegen): is the automated process of creating TypeScript types based on schemas or other source data, ensuring type safety and consistency in code, especially when working with APIs or databases.
 
+// ESLint: is a static code analysis tool for identifying and fixing problems in JavaScript code. It helps developers enforce coding standards, catch syntax errors, and maintain code quality by providing rules for writing consistent and error-free code.
+
 // Sentry: is an application monitoring platform that helps developers track, identify, and resolve errors in real-time across their applications and services.
 
 // Caching in Next.js is a technique that optimizes performance by storing and retrieving data efficiently, enhancing the speed of web applications.
