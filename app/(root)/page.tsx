@@ -55,6 +55,8 @@ export default async function Home({
 
 // Sanity: is a headless content management system (CMS) that provides a flexible and real-time backend for managing structured content, enabling developers to build and deliver dynamic applications across multiple platforms.
 
+// Sentry: is an application monitoring platform that helps developers track, identify, and resolve errors in real-time across their applications and services.
+
 // Caching in Next.js is a technique that optimizes performance by storing and retrieving data efficiently, enhancing the speed of web applications.
 
 // * Server Side Rendering (SSR):
