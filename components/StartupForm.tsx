@@ -72,13 +72,14 @@ const StartupForm = () => {
     }
   };
 
+  // useActionState: Allows us to manage the state of the form based on the result of a from action
   const [state, formAction, isPending] = useActionState(handleFormSubmit, {
     error: "",
     status: "INITIAL",
   });
 
   return (
-    <form action={() => {}} className="startup-form">
+    <form action={formAction} className="startup-form">
       <div>
         <label htmlFor="title" className="startup-form_label">
           Title
