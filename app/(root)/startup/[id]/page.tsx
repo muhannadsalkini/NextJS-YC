@@ -1,6 +1,9 @@
 import { formatDate } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
-import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
+import {
+  PLAYLIST_BY_SLUG_QUERY,
+  STARTUP_BY_ID_QUERY,
+} from "@/sanity/lib/queries";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -8,6 +11,7 @@ import React, { Suspense } from "react";
 import markdownit from "markdown-it";
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
 
 const md = markdownit();
 
@@ -16,7 +20,13 @@ export const experimental_ppr = true;
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
 
-  const [post] = await Promise.all([client.fetch(STARTUP_BY_ID_QUERY, { id })]);
+  // Parrallel queries: allow to fetch data from multiple sources at the same time. Faster than fetching data sequentially but can lead to inconsistent results.
+  const [post, editorPostsResponse] = await Promise.all([
+    client.fetch(STARTUP_BY_ID_QUERY, { id }),
+    client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks-new" }),
+  ]);
+
+  const editorPosts = editorPostsResponse?.select || []; // check if editorPostsResponse is null
 
   if (!post) return notFound();
 
@@ -76,7 +86,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         <hr className="divider" />
 
-        {/* {editorPosts?.length > 0 && (
+        {editorPosts?.length > 0 && (
           <div className="max-w-4xl mx-auto">
             <p className="text-30-semibold">Editor Picks</p>
 
@@ -86,7 +96,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
               ))}
             </ul>
           </div>
-        )} */}
+        )}
 
         <Suspense fallback={<Skeleton className="view_skeleton" />}>
           <View id={id} />
